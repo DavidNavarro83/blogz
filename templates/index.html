@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="margin-left: 10px;">blog users!</h1>
+
+
+    
+
+    {% if users|length == 0 %}
+    <p>No users yet</p>
+    {% else %}
+
+        
+    <div class="mauto" style="margin-left: 10px; max-width: 300px;">
+    <ul class="list-group">
+    {% for user in users: %}
+        <li class="list-group-item" style="padding: 0.2rem;"><a class="btn btn-link" href="/blog?user={{ user.username }}">{{ user.username }}</a></li>
+    {% endfor %}
+    </ul>
+
+    </div> 
+
+    {% endif %}
+
+    
+
+{% endblock %}

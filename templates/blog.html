@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>blog posts!</h1>
+    {% if blog %}
+        <h2>{{ blog.name }}</h2>
+        <p>{{ blog.text }}</p>
+        <p><i><small>written by</small>  <a href="/blog?user={{user.username}}">{{ user.username }}</a></i></p>
+        
+    {% elif user %}
+
+
+
+        
+        {% if list_of_blogs|length == 0 %}
+            <p>No blogs yet</p>
+        {% else %}
+            {% for blog in list_of_blogs: %}
+            <h2><a href="/blog?id={{ blog.id }}">{{ blog.name }}</a></h2>
+                <p>{{ blog.text }}</p>
+                <p><i><small>written by</small>  <a href="/blog?user={{user.username}}">{{ user.username }}</a></i></p>
+            <hr />
+            {% endfor %}
+        {% endif %}
+
+    {% else %}
+
+        {% if blogs %}
+            {% for blog in blogs: %}
+            <h2><a href="/blog?id={{ blog.id }}">{{ blog.name }}</a></h2>
+                <p>{{ blog.text }}</p>
+                <p><i><small>written by</small>  <a href="/blog?user={{blog.owner.username}}">{{ blog.owner.username }}</a></i></p>
+            <hr />
+            {% endfor %}
+        {% else %}
+            No Blogs not found.
+        {% endif %}
+    {% endif %}
+
+
+
+    
+
+{% endblock %}
