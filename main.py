@@ -68,6 +68,7 @@ def login():
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        error = "Please enter a user name."
         username = request.form['username']
         password = request.form['password']
         verify = request.form['verify']
@@ -75,6 +76,9 @@ def signup():
         #     flash('zoiks! "' + email + '" does not seem like an email address')
         #     return redirect('/register')
         username_db_count = User.query.filter_by(username=username).count()
+        
+        if username == '' or ' ' in username:
+            return render_template("register.html", error=error)
         if username_db_count > 0:
             flash('yikes! "' + username + '" is already taken and password reminders are not implemented')
             return redirect('/register')
